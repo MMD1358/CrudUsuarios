@@ -1,12 +1,27 @@
 * {
+  box-sizing: border-box;
   padding: 5px;
 }
-div {
+.container {
   background-color: white;
   border-radius: 5px;
-  border: 1px solid lightgray;
+  border: 1px solid rgb(184, 184, 184);
+}
+.user-form input {
+  margin: 5px;
 }
 p {
-  font-weight: bold;
+  font-weight: bolder;
   font-size: larger;
+}
+form {
+  display: grid;
+  grid-template-columns: 40% 40% 20%;
+}
+
+.primary-button {
+  color: white;
+  background-color: rgb(74, 68, 68);
+  border: 0px;
+  border-radius: 3px;
 }
