@@ -4,7 +4,7 @@
 }
 .container {
   background-color: white;
-  border-radius: 5px;
+  border-radius: 10px;
   border: 1px solid rgb(184, 184, 184);
 }
 .user-form input {
@@ -23,5 +23,13 @@ form {
   color: white;
   background-color: rgb(74, 68, 68);
   border: 0px;
-  border-radius: 3px;
+  border-radius: 6px;
+}
+
+.user-form input[type='text'] {
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  outline: none;
+  display: block;
 }
