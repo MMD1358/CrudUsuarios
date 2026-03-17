@@ -1,10 +1,65 @@
 <div class="container">
-  <p>Crear usuario</p>
-  <form class="user-form">
-    <label>Email</label>
-    <label>Nombre</label>
-    <span></span> <input type="text" name="email" placeholder="user@example.com" />
-    <input type="text" name="name" placeholder="Ejemplo: Juan Pérez" />
-    <input class="primary-button" type="submit" value="Crear" />
+  <p>{{ selectedUser() ? 'Editar usuario' : 'Crear usuario' }}</p>
+
+  <form class="user-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-field">
+      <label for="email">Email</label>
+
+      <input
+        type="text"
+        id="email"
+        name="email"
+        formControlName="email"
+        placeholder="user@example.com"
+      />
+
+      <div class="error-space">
+        @if (email.invalid && (email.dirty || email.touched)) {
+          <div class="error-text">
+            @if (email.hasError('required')) {
+              <div>El email es obligatorio.</div>
+            }
+            @if (email.hasError('email')) {
+              <div>El email debe contener los requisitos mínimos.</div>
+            }
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="form-field">
+      <label for="name">Nombre</label>
+
+      <input
+        type="text"
+        id="name"
+        name="name"
+        formControlName="name"
+        placeholder="Ejemplo: Juan Pérez"
+      />
+
+      <div class="error-space">
+        @if (name.invalid && (name.dirty || name.touched)) {
+          <div class="error-text">
+            @if (name.hasError('required')) {
+              <div>El nombre es obligatorio.</div>
+            }
+            @if (name.hasError('minlength')) {
+              <div>El nombre debe tener como mínimo 3 letras.</div>
+            }
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button class="secondary-button" type="button" (click)="onReset()">Reset</button>
+
+      <button class="primary-button" type="submit" [disabled]="form.invalid || isSubmitting()">
+        {{ isSubmitting() ? (selectedUser() ? 'Guardando...' : 'Creando...') : submitButtonText() }}
+      </button>
+    </div>
   </form>
+
+  <p>{{ form.value | json }}</p>
 </div>

@@ -1,35 +1,79 @@
 * {
   box-sizing: border-box;
-  padding: 5px;
 }
+
 .container {
   background-color: white;
   border-radius: 10px;
   border: 1px solid rgb(184, 184, 184);
+  padding: 16px;
 }
-.user-form input {
-  margin: 5px;
-}
+
 p {
   font-weight: bolder;
   font-size: larger;
+  margin: 0 0 16px 0;
 }
-form {
+
+.user-form {
   display: grid;
-  grid-template-columns: 40% 40% 20%;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 16px;
+  align-items: start;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field label {
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.user-form input {
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  outline: none;
+  width: 100%;
+}
+
+.user-form input.ng-invalid.ng-touched {
+  border: 1px solid rgb(255, 120, 120);
+}
+
+.error-space {
+  min-height: 20px;
+  margin-top: 6px;
+}
+
+.error-text {
+  color: rgb(180, 40, 40);
+  font-size: 14px;
+}
+
+.buttons {
+  display: flex;
+  gap: 8px;
+  align-self: start;
+  margin-top: 28px;
 }
 
 .primary-button {
   color: white;
   background-color: rgb(74, 68, 68);
-  border: 0px;
+  border: 0;
   border-radius: 6px;
+  padding: 10px 14px;
+  cursor: pointer;
 }
 
-.user-form input[type='text'] {
+.secondary-button {
+  background-color: white;
+  border: 1px solid lightgray;
   border-radius: 8px;
-  border: 1px solid #ccc;
-  padding: 10px;
-  outline: none;
-  display: block;
+  padding: 10px 14px;
+  cursor: pointer;
 }

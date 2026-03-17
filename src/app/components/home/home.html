@@ -1,12 +1,21 @@
-<body>
-  <div>
-    <app-title></app-title>
-  </div>
-  <main>
-    <app-user-form></app-user-form>
-    <app-table></app-table>
-  </main>
-  <footer>
-    <app-footer></app-footer>
-  </footer>
-</body>
+<div>
+  <app-title></app-title>
+</div>
+
+<main>
+  <app-user-form
+    [selectedUser]="selectedUser()"
+    [isSubmitting]="isSubmittingSignal()"
+    (submitUser)="onSubmitUser($event)"
+  >
+  </app-user-form>
+
+  <app-table
+    [users]="usersSignal()"
+    [isLoading]="isLoadingSignal()"
+    [errorMessage]="errorMessageSignal()"
+    (deleteUser)="onDeleteUser($event)"
+    (editUser)="onEditUser($event)"
+  >
+  </app-table>
+</main>

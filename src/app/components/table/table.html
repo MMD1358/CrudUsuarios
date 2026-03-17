@@ -1,61 +1,50 @@
 <div class="container">
-  <p>Usuarios <span class="total">3 Total</span></p>
-  <table>
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Email</th>
-        <th>Nombre</th>
-        <th>Creado</th>
-        <th>Actualizado</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>8efa2d9d-058f-4e26-8330-da583bcb48bf</td>
-        <td>test@test.com</td>
-        <td>John Doe</td>
-        <td>21/1/26, 17:26</td>
-        <td>21/1/26, 17:33</td>
-        <td>
-          <input class="secondary-button" type="submit" value="Editar" />
-          <input class="tertiary-button" type="button" value="Eliminar" />
-        </td>
-      </tr>
-      <tr>
-        <td>8efa2d9d-058f-4e26-8330-da583bcb48bf</td>
-        <td>test@test.com</td>
-        <td>John Doe</td>
-        <td>21/1/26, 17:26</td>
-        <td>21/1/26, 17:33</td>
-        <td>
-          <input class="secondary-button" type="submit" name="edit" value="Editar" />
-          <input class="tertiary-button" type="button" name="delete" value="Eliminar" />
-        </td>
-      </tr>
-      <tr>
-        <td>8efa2d9d-058f-4e26-8330-da583bcb48bf</td>
-        <td>test@test.com</td>
-        <td>John Doe</td>
-        <td>21/1/26, 17:26</td>
-        <td>21/1/26, 17:33</td>
-        <td>
-          <input class="secondary-button" type="submit" name="edit" value="Editar" />
-          <input class="tertiary-button" type="button" name="delete" value="Eliminar" />
-        </td>
-      </tr>
-      <tr>
-        <td>8efa2d9d-058f-4e26-8330-da583bcb48bf</td>
-        <td>test@test.com</td>
-        <td>John Doe</td>
-        <td>21/1/26, 17:26</td>
-        <td>21/1/26, 17:33</td>
-        <td>
-          <input class="secondary-button" type="submit" name="edit" value="Editar" />
-          <input class="tertiary-button" type="button" name="delete" value="Eliminar" />
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <p>
+    Usuarios
+    <span class="total">{{ totalsUsers() }} Total</span>
+  </p>
+
+  @if (isLoading()) {
+    <p>Cargando usuarios...</p>
+  }
+
+  @if (errorMessage()) {
+    <p>{{ errorMessage() }}</p>
+  }
+
+  @if (!isLoading() && totalsUsers() > 0) {
+    <table>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Email</th>
+          <th>Nombre</th>
+          <th>Creado</th>
+          <th>Actualizado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (user of users(); track user.id) {
+          <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.createdAt | date: 'dd/MM/yy, HH:mm' }}</td>
+            <td>{{ user.updatedAt | date: 'dd/MM/yy, HH:mm' }}</td>
+            <td>
+              <button class="secondary-button" type="button" (click)="editUser.emit(user)">
+                Editar
+              </button>
+              <button class="tertiary-button" type="button" (click)="deleteUser.emit(user.id)">
+                Eliminar
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  } @else if (!isLoading()) {
+    <p>No hay usuarios registrados.</p>
+  }
 </div>
